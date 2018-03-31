@@ -37,6 +37,16 @@ alter table mahasiswa add jeniskelamin varchar(10)
 alter table dosen add email varchar(100)
 
 --Tugas 03--
-UPDATE KRS SET akhir = '90' ;
-UPDATE KRS SET huruf = 'B' ;
-UPDATE KRS SET bobot = '3,67' ;
+UPDATE KRS SET akhir = ((0.4*uts)+(0.6*uas)) ;
+
+UPDATE KRS SET huruf = 'A' WHERE akhir >= 85 ;
+UPDATE KRS SET huruf = 'B' WHERE akhir < 85 AND akhir >= 75 ;
+UPDATE KRS SET huruf = 'C' WHERE akhir < 75 AND akhir >= 60 ;
+UPDATE KRS SET huruf = 'D' WHERE akhir < 60 AND akhir >= 40 ;
+UPDATE KRS SET huruf = 'E' WHERE akhir < 40 ;
+
+UPDATE KRS SET bobot = 4 WHERE huruf = 'A';
+UPDATE KRS SET bobot = 3 WHERE huruf = 'B';
+UPDATE KRS SET bobot = 2 WHERE huruf = 'C';
+UPDATE KRS SET bobot = 1 WHERE huruf = 'D';
+UPDATE KRS SET bobot = 0 WHERE huruf = 'E';
