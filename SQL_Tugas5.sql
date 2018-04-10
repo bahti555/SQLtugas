@@ -56,5 +56,10 @@ UPDATE KRS SET bobot = 0 WHERE huruf = 'E';
 
 --Tugas 05--
 
-SELECT 
+--Menampilkan nim mahasiswa yang mendapat nilai 'B'--
+SELECT mahasiswa.nim, krs.huruf FROM mahasiswa, krs WHERE krs.huruf='B';
+
+--Menampilkan nim mahasiswa yang mendapat nilai 'B' sama atau lebih dari 2 matakuliah--
+SELECT mahasiswa.nim, krs.huruf FROM mahasiswa, krs WHERE krs.huruf='B';
+
 
