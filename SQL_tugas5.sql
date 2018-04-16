@@ -24,11 +24,37 @@ insert into matakuliah (kodemat, nama, sks) values ('aac', 'Arsitektur Komputer'
 insert into matakuliah (kodemat, nama, sks) values ('aad', 'Implementasi BasisData', 4);
 insert into matakuliah (kodemat, nama, sks) values ('aae', 'Bahasa Pemrograman', 4);
 
-insert into KRS (nim, kodekrs, nip, uts, uas, akhir, huruf, bobot) values ('maaaa','k001', 'doooa', 70, 80, 78.5, 'B', 80);
-insert into KRS (nim, kodekrs, nip, uts, uas, akhir, huruf, bobot) values ('maaab','k002', 'dooob', 70, 80, 78.5, 'B', 80);
-insert into KRS (nim, kodekrs, nip, uts, uas, akhir, huruf, bobot) values ('maaac','k003', 'doooc', 70, 80, 78.5, 'B', 80);
-insert into KRS (nim, kodekrs, nip, uts, uas, akhir, huruf, bobot) values ('maaad','k004', 'doood', 70, 80, 78.5, 'B', 80);
-insert into KRS (nim, kodekrs, nip, uts, uas, akhir, huruf, bobot) values ('maaae','k005', 'doooe', 70, 80, 78.5, 'B', 80);
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaaa','k001', 'doooa', 70, 80, 'aaa');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaab','k002', 'dooob', 70, 80, 'aaa');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaac','k003', 'doooc', 70, 80, 'aaa');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaad','k004', 'doood', 70, 80, 'aaa');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaae','k005', 'doooe', 70, 80, 'aaa');
+
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaaa','k006', 'doooa', 85, 84, 'aab');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaab','k007', 'dooob', 89, 98, 'aab');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaac','k008', 'doooc', 79, 70, 'aab');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaad','k009', 'doood', 88, 80, 'aab');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaae','k010', 'doooe', 70, 86, 'aab');
+
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaaa','k011', 'doooa', 89, 80, 'aac');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaab','k012', 'dooob', 70, 90, 'aac');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaac','k013', 'doooc', 99, 80, 'aac');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaad','k014', 'doood', 70, 95, 'aac');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaae','k015', 'doooe', 84, 80, 'aac');
+
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaaa','k016', 'doooa', 89, 80, 'aad');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaab','k017', 'dooob', 70, 80, 'aad');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaac','k018', 'doooc', 80, 80, 'aad');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaad','k019', 'doood', 70, 70, 'aad');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaae','k020', 'doooe', 77, 80, 'aad');
+
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaaa','k021', 'doooa', 70, 88, 'aae');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaab','k022', 'dooob', 98, 80, 'aae');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaac','k023', 'doooc', 100, 100, 'aae');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaad','k024', 'doood', 79, 80, 'aae');
+insert into KRS (nim, kodekrs, nip, uts, uas, kodemat) values ('maaae','k025', 'doooe', 70, 76, 'aae');
+
+
 
 --Tugas 02--
 
@@ -60,6 +86,13 @@ UPDATE KRS SET bobot = 0 WHERE huruf = 'E';
 SELECT mahasiswa.nim, krs.huruf FROM mahasiswa, krs WHERE krs.huruf='B';
 
 --Menampilkan nim mahasiswa yang mendapat nilai 'B' sama atau lebih dari 2 matakuliah--
-SELECT mahasiswa.nim, krs.huruf FROM mahasiswa, krs WHERE krs.huruf='B';
+SELECT DISTINCT nim,huruf,kodemat from krs where kodemat>=2 in (huruf='B');
 
+--menampilkan rata2 nilai uts di setiap mata kuliah--
+select avg(uts) as rata_rata from krs group by kodemat;
 
+--menampilkan rata2 nilai akhir di setiap nip dosen--
+select avg(krs.akhir) as rata_rata from matakuliah, krs, dosen group by dosen.nip;
+
+--menampilkan nama mahasiswa yang memiliki nilai akhir tertinggi--
+select mahasiswa.nama , avg(krs.akhir) as rata_rata from mahasiswa, krs having max(rata_rata);
